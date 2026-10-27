@@ -137,7 +137,9 @@ async function makeGitSource() {
   if (dirty !== '') console.warn('smoke: WARNING: working tree has uncommitted changes; the git mode tests the committed HEAD only');
   const clone = path.join(work, 'git-source');
   await run('git', ['clone', '--quiet', '--local', root, clone]);
-  await run('git', ['-c', 'user.name=smoke', '-c', 'user.email=smoke@example.invalid', 'tag', '-a', `v${pkg.version}`, '-m', 'smoke'], { cwd: clone });
+  // `-f`: once the real release tag exists upstream, the clone already carries it, and a plain
+  // `git tag -a` would fail. The clone is throwaway, so moving the tag onto its HEAD is safe.
+  await run('git', ['-c', 'user.name=smoke', '-c', 'user.email=smoke@example.invalid', 'tag', '-f', '-a', `v${pkg.version}`, '-m', 'smoke'], { cwd: clone });
   return clone;
 }
 
