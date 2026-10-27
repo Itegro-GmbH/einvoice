@@ -1,0 +1,88 @@
+{
+  "profile": "en16931",
+  "number": "RE-2026-00012",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-26",
+  "deliveryDate": "2026-09-11",
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "93815/08152",
+    "legalRegistration": {
+      "id": "HRB 12345",
+      "scheme": "0002"
+    },
+    "contact": {
+      "name": "Erika Muster",
+      "phone": "+49 711 123456-0",
+      "email": "rechnung@musterwerk.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "rechnung@musterwerk.example"
+    }
+  },
+  "buyer": {
+    "name": "Beispiel & Söhne KG",
+    "address": {
+      "street": "Hauptstraße 1",
+      "street2": "Hinterhaus",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "country": "DE"
+    },
+    "vatId": "DE987654321",
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "einkauf@beispiel.example"
+    }
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE89370400440532013000"
+  },
+  "lines": [
+    {
+      "name": "Schrauben M6x40",
+      "quantity": 2500,
+      "unit": "Stück",
+      "unitPrice": "12.3456",
+      "priceBaseQuantity": 100,
+      "vat": {
+        "category": "S",
+        "rate": 19
+      },
+      "allowances": [
+        {
+          "percent": "2.5",
+          "reason": "Staffelrabatt",
+          "reasonCode": "95"
+        }
+      ]
+    },
+    {
+      "name": "Dichtungsband",
+      "quantity": "7.5",
+      "unit": "m",
+      "unitPrice": "0.8",
+      "priceBaseQuantity": 1,
+      "vat": {
+        "category": "S",
+        "rate": 19
+      },
+      "charges": [
+        {
+          "amount": "1.50",
+          "reason": "Zuschnitt",
+          "reasonCode": "ZZZ"
+        }
+      ]
+    }
+  ]
+}

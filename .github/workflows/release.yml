@@ -1,0 +1,154 @@
+name: release
+
+# Publishes @itegro/einvoice. Runs ONLY for a pushed tag that matches v* (for example v0.1.0);
+# an ordinary push, pull request or manual run never reaches a publish step.
+#
+# Flow: guard (tag == package.json version, commit is on main, changelog entry exists)
+#       -> ci.yml (type check, lint, tests incl. veraPDF, build, pack, smoke tests of the tarball)
+#       -> in parallel: GitHub release with the tarball attached, and npm publish of that same tarball.
+#
+# npm authentication, two ways in one file:
+# - Until trusted publishing is set up for the package on npmjs.com, the first publication uses the
+#   repository secret NPM_TOKEN, if it exists.
+# - Without NPM_TOKEN the job authenticates through OIDC (npm "trusted publishing", needs npm >= 11.5.1
+#   and a trusted publisher entry for this repository and workflow file on npmjs.com).
+# After the first publication: configure the trusted publisher on npmjs.com (package settings,
+# GitHub Actions, organization Itegro-GmbH, repository einvoice, workflow release.yml), then DELETE
+# the secret NPM_TOKEN. From then on the OIDC path is used automatically.
+# Both ways publish with --provenance, so the package page shows where and how it was built.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - name: Tag matches package.json version
+        run: node scripts/check-release-version.mjs "$GITHUB_REF_NAME"
+
+      - name: Tagged commit is on main
+        run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::The tagged commit is not contained in main. Releases are cut from main only."
+            exit 1
+          fi
+
+      - name: Changelog entry exists
+        run: node scripts/release-notes.mjs "${GITHUB_REF_NAME#v}" > /dev/null
+
+  ci:
+    needs: guard
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  github-release:
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: package-tarball
+          path: ${{ runner.temp }}/tarball
+
+      # The tarball is attached under a stable name, so the README can link
+      # https://github.com/Itegro-GmbH/einvoice/releases/download/vX.Y.Z/itegro-einvoice-X.Y.Z.tgz
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          TARBALL="$(ls "$RUNNER_TEMP"/tarball/*.tgz)"
+          test "$(basename "$TARBALL")" = "itegro-einvoice-$VERSION.tgz"
+          node scripts/release-notes.mjs "$VERSION" > "$RUNNER_TEMP/notes.md"
+          PRERELEASE=""
+          case "$VERSION" in *-*) PRERELEASE="--prerelease" ;; esac
+          gh release create "$GITHUB_REF_NAME" "$TARBALL" --verify-tag --title "$GITHUB_REF_NAME" --notes-file "$RUNNER_TEMP/notes.md" $PRERELEASE
+
+  publish-npm:
+    needs: ci
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write # OIDC: trusted publishing and the provenance attestation
+    env:
+      # 'true' if the repository secret NPM_TOKEN exists (secrets cannot be tested in `if:` directly).
+      HAS_NPM_TOKEN: ${{ secrets.NPM_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      # Trusted publishing needs npm >= 11.5.1; the npm bundled with Node 24 normally is newer.
+      - name: Ensure a recent npm
+        run: |
+          npm --version
+          node -e "const v=process.argv[1].split('.').map(Number); const ok=v[0]>11||(v[0]===11&&(v[1]>5||(v[1]===5&&v[2]>=1))); process.exit(ok?0:1)" "$(npm --version)" || npm install -g npm@^11.5.1
+          npm --version
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: package-tarball
+          path: ${{ runner.temp }}/tarball
+
+      - name: Publish to npm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -o pipefail
+          VERSION="${GITHUB_REF_NAME#v}"
+          TARBALL="$(ls "$RUNNER_TEMP"/tarball/*.tgz)"
+          TAG_ARGS=()
+          case "$VERSION" in *-*) TAG_ARGS=(--tag next) ;; esac
+
+          if [ "$HAS_NPM_TOKEN" = "true" ]; then
+            echo "Authenticating with the NPM_TOKEN secret (first publication; delete the secret once trusted publishing is set up)."
+            # A throw-away user config that reads the token from the environment; the token never appears in a command line.
+            printf '%s\n' "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > "$RUNNER_TEMP/npmrc"
+            export NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/npmrc"
+          else
+            echo "No NPM_TOKEN secret; authenticating through OIDC (npm trusted publishing)."
+          fi
+
+          if ! npm publish "$TARBALL" --provenance --access public "${TAG_ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/publish.log"; then
+            if grep -qiE "scope not found|is not in this registry|organization .* not found" "$RUNNER_TEMP/publish.log"; then
+              echo "::error title=npm organization missing::The npm scope @itegro does not exist yet. Create the organization 'itegro' on npmjs.com (or publish under another scope), then re-run this job. Nothing was published."
+            elif grep -qiE "previously published versions|cannot publish over" "$RUNNER_TEMP/publish.log"; then
+              echo "::error title=Version already published::$VERSION already exists on npm. Bump the version and tag again; npm versions are immutable."
+            elif grep -qiE "E401|E403|ENEEDAUTH|unauthorized|forbidden" "$RUNNER_TEMP/publish.log"; then
+              echo "::error title=npm authentication failed::Neither a valid NPM_TOKEN secret nor a trusted publisher entry for Itegro-GmbH/einvoice (workflow release.yml) was accepted by npm."
+            fi
+            exit 1
+          fi

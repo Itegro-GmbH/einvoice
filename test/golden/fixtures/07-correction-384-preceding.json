@@ -1,0 +1,86 @@
+{
+  "profile": "en16931",
+  "type": "384",
+  "number": "RK-2026-00007",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-26",
+  "deliveryDate": "2026-09-10",
+  "notes": [
+    "Rechnungskorrektur zu RE-2026-00001: Stundensatz korrigiert."
+  ],
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "93815/08152",
+    "legalRegistration": {
+      "id": "HRB 12345",
+      "scheme": "0002"
+    },
+    "contact": {
+      "name": "Erika Muster",
+      "phone": "+49 711 123456-0",
+      "email": "rechnung@musterwerk.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "rechnung@musterwerk.example"
+    }
+  },
+  "buyer": {
+    "name": "Beispiel & Söhne KG",
+    "address": {
+      "street": "Hauptstraße 1",
+      "street2": "Hinterhaus",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "country": "DE"
+    },
+    "vatId": "DE987654321",
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "einkauf@beispiel.example"
+    }
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE89370400440532013000",
+    "bic": "COBADEFFXXX",
+    "accountHolder": "Musterwerk GmbH",
+    "terms": "Zahlbar innerhalb von 14 Tagen ohne Abzug.",
+    "reference": "RE-2026-00001"
+  },
+  "precedingInvoices": [
+    {
+      "number": "RE-2026-00001",
+      "issueDate": "2026-09-12"
+    }
+  ],
+  "lines": [
+    {
+      "name": "Storno Beratung Rechnungsformat",
+      "quantity": -12,
+      "unit": "Stunde",
+      "unitPrice": "95.00",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    },
+    {
+      "name": "Beratung Rechnungsformat (korrigiert)",
+      "quantity": 12,
+      "unit": "Stunde",
+      "unitPrice": "90.00",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    }
+  ]
+}

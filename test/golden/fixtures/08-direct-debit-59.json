@@ -1,0 +1,66 @@
+{
+  "profile": "en16931",
+  "number": "RE-2026-00008",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-19",
+  "periodStart": "2026-09-01",
+  "periodEnd": "2026-09-30",
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "93815/08152",
+    "legalRegistration": {
+      "id": "HRB 12345",
+      "scheme": "0002"
+    },
+    "contact": {
+      "name": "Erika Muster",
+      "phone": "+49 711 123456-0",
+      "email": "rechnung@musterwerk.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "rechnung@musterwerk.example"
+    }
+  },
+  "buyer": {
+    "name": "Beispiel & Söhne KG",
+    "address": {
+      "street": "Hauptstraße 1",
+      "street2": "Hinterhaus",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "country": "DE"
+    },
+    "vatId": "DE987654321",
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "einkauf@beispiel.example"
+    }
+  },
+  "payment": {
+    "means": "sepa-direct-debit",
+    "mandateReference": "MANDAT-2024-0815",
+    "creditorId": "DE98ZZZ09999999999",
+    "debitedIban": "DE75512108001245126199",
+    "terms": "Der Betrag wird am Fälligkeitstag per SEPA-Lastschrift eingezogen."
+  },
+  "lines": [
+    {
+      "name": "Wartungsvertrag September 2026",
+      "quantity": 1,
+      "unit": "Monat",
+      "unitPrice": "299.00",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    }
+  ]
+}

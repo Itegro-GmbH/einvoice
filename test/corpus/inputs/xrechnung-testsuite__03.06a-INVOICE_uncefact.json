@@ -1,0 +1,96 @@
+{
+  "profile": "xrechnung",
+  "number": "112233",
+  "issueDate": "2021-04-23",
+  "dueDate": "2021-04-28",
+  "deliveryDate": "2020-11-23",
+  "buyerReference": "991-33333TEST-33",
+  "notes": [
+    "Rechnung enthält 100 EUR (Umsatz)Steuer auf Altteile gem. Abschn. 10.5 Abs. 3 UStAE"
+  ],
+  "seller": {
+    "name": "Testverkäufer",
+    "id": "116078",
+    "address": {
+      "street": "Teststraße",
+      "city": "Testhausen",
+      "postalCode": "12345",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "1121081508150",
+    "contact": {
+      "name": "Test",
+      "phone": "123456789",
+      "email": "test@test.de"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "seller@email.de"
+    }
+  },
+  "buyer": {
+    "name": "Testkäufer",
+    "address": {
+      "street": "Teststraße",
+      "city": "Testhausen",
+      "postalCode": "12345",
+      "country": "DE"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "buyer@info.de"
+    }
+  },
+  "payment": {
+    "means": "58",
+    "iban": "DE79000000001234567890",
+    "accountHolder": "Testkäufer"
+  },
+  "lines": [
+    {
+      "id": "1",
+      "name": "Neumotor",
+      "quantity": "1.00",
+      "unit": "C62",
+      "unitPrice": "1000.00",
+      "vat": {
+        "category": "S",
+        "rate": "19.00"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Bemessungsgrundlage und Umsatzsteuer auf Altteil",
+      "quantity": "1.00",
+      "unit": "C62",
+      "unitPrice": "100.00",
+      "vat": {
+        "category": "S",
+        "rate": "19.00"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Korrektur/Stornierung Bemessungsgrundlage der Umsatzsteuer auf Altteil",
+      "quantity": "-1.00",
+      "unit": "C62",
+      "unitPrice": "100.00",
+      "vat": {
+        "category": "Z",
+        "rate": "0.00"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Montage",
+      "quantity": "1.00",
+      "unit": "HUR",
+      "unitPrice": "500.00",
+      "vat": {
+        "category": "S",
+        "rate": "19.00"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "profile": "en16931",
+  "number": "RE-2026-00003",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-26",
+  "deliveryDate": "2026-09-10",
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "93815/08152",
+    "legalRegistration": {
+      "id": "HRB 12345",
+      "scheme": "0002"
+    },
+    "contact": {
+      "name": "Erika Muster",
+      "phone": "+49 711 123456-0",
+      "email": "rechnung@musterwerk.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "rechnung@musterwerk.example"
+    }
+  },
+  "buyer": {
+    "name": "Example Ltd.",
+    "address": {
+      "street": "1 High Street",
+      "city": "Dublin",
+      "postalCode": "D02 X285",
+      "country": "IE"
+    },
+    "vatId": "IE6388047V"
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE89370400440532013000",
+    "bic": "COBADEFFXXX"
+  },
+  "lines": [
+    {
+      "name": "Softwareentwicklung",
+      "quantity": 40,
+      "unit": "Stunde",
+      "unitPrice": "110.00",
+      "vat": {
+        "category": "AE"
+      }
+    }
+  ]
+}

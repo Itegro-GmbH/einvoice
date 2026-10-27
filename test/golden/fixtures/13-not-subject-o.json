@@ -1,0 +1,66 @@
+{
+  "profile": "en16931",
+  "number": "RE-2026-00013",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-26",
+  "deliveryDate": "2026-09-10",
+  "seller": {
+    "name": "Verein Musterhilfe e. V.",
+    "legalRegistration": {
+      "id": "VR 4711",
+      "scheme": "0002"
+    },
+    "address": {
+      "street": "Vereinsweg 2",
+      "city": "Köln",
+      "postalCode": "50667",
+      "country": "DE"
+    },
+    "contact": {
+      "name": "Kassenwart",
+      "phone": "+49 221 000000",
+      "email": "kasse@musterhilfe.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "kasse@musterhilfe.example"
+    }
+  },
+  "buyer": {
+    "name": "Beispiel & Söhne KG",
+    "address": {
+      "street": "Hauptstraße 1",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "country": "DE"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "einkauf@beispiel.example"
+    }
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE89370400440532013000"
+  },
+  "lines": [
+    {
+      "name": "Mitgliedsbeitrag 2026",
+      "quantity": 1,
+      "unit": "Jahr",
+      "unitPrice": "120.00",
+      "vat": {
+        "category": "O"
+      }
+    },
+    {
+      "name": "Spendenquittung Bearbeitung",
+      "quantity": 2,
+      "unit": "Stück",
+      "unitPrice": "5.00",
+      "vat": {
+        "category": "O"
+      }
+    }
+  ]
+}

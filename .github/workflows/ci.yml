@@ -1,0 +1,138 @@
+name: ci
+
+# Runs on every push and pull request to main: type check, lint, tests (including veraPDF PDF/A-3B
+# validation), build, `npm pack`, and the package smoke test against the packed tarball
+# (host install, install from URL, install as Git dependency, and a throw-away Linux container on
+# the supported Node versions). Nothing here publishes anything; see release.yml.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  # release.yml runs the same checks before it publishes.
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  # Only a newer push to the same pull request supersedes a running run; runs on main always finish.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      # Makes test/pdfa/verapdf.test.ts fail instead of silently skipping when veraPDF is missing.
+      VERAPDF_REQUIRED: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+
+      # `npm ci` runs the package's `prepare` script, which builds dist/.
+      - run: npm ci
+
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      # veraPDF (Java CLI, scripts/setup-verapdf.sh) validates PDF/A-3B in test/pdfa/verapdf.test.ts.
+      # The cache key follows the version pinned inside the script, so bumping it busts the cache.
+      - name: veraPDF version
+        id: verapdf-version
+        run: echo "version=$(sed -n 's/^VER=//p' scripts/setup-verapdf.sh)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache veraPDF CLI
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: tools/verapdf
+          key: verapdf-${{ steps.verapdf-version.outputs.version }}
+
+      - name: Install veraPDF CLI
+        run: sh scripts/setup-verapdf.sh
+
+      # The Factur-X Schematron rule sets are not part of the repository (see NOTICE); the test
+      # suite installs them on first use. Cached on the pinned sources, so a change to
+      # facturx-setup.ts rebuilds them.
+      - name: Cache Factur-X rule sets
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: schematron/facturx
+          key: facturx-${{ hashFiles('src/xml-validate/facturx-setup.ts') }}
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Pack
+        run: |
+          mkdir -p "$RUNNER_TEMP/pack"
+          npm pack --pack-destination "$RUNNER_TEMP/pack"
+          ls -l "$RUNNER_TEMP/pack"
+          echo "TARBALL=$(ls "$RUNNER_TEMP"/pack/*.tgz)" >> "$GITHUB_ENV"
+
+      - name: Dry-run publish (lists the package contents, publishes nothing)
+        run: npm publish --dry-run "$TARBALL"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: package-tarball
+          path: ${{ env.TARBALL }}
+          if-no-files-found: error
+          retention-days: 7
+
+  # Installs the packed tarball like a consumer would and generates an invoice. Needs the tarball
+  # of the check job, so a failing check never reaches this point.
+  smoke:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: host (tarball, URL, Git dependency)
+            command: node scripts/smoke/run-local.mjs --mode all
+          - name: linux container node 24
+            command: node scripts/smoke/run-docker.mjs --image node:24-slim
+          - name: linux container node 22
+            command: node scripts/smoke/run-docker.mjs --image node:22-slim
+          - name: linux container node 20 (engines floor)
+            command: node scripts/smoke/run-docker.mjs --image node:20-slim
+    name: smoke / ${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The Git dependency smoke test clones this repository; a shallow clone cannot be cloned again.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: package-tarball
+          path: ${{ runner.temp }}/tarball
+
+      - name: Smoke test
+        run: |
+          SMOKE_TARBALL="$(ls "$RUNNER_TEMP"/tarball/*.tgz)"
+          export SMOKE_TARBALL
+          ${{ matrix.command }}

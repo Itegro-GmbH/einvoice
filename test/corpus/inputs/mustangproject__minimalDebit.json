@@ -1,0 +1,57 @@
+{
+  "profile": "en16931",
+  "number": "471102",
+  "issueDate": "2018-03-04",
+  "deliveryDate": "2018-03-04",
+  "seller": {
+    "name": "Lieferant GmbH",
+    "address": {
+      "street": "Lieferantenstraße 20",
+      "city": "München",
+      "postalCode": "80333",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "201/113/40209"
+  },
+  "buyer": {
+    "name": "Kunden AG Mitte",
+    "address": {
+      "street": "Kundenstraße 15",
+      "city": "Frankfurt",
+      "postalCode": "69876",
+      "country": "DE"
+    }
+  },
+  "payment": {
+    "means": "59",
+    "creditorId": "DE98ZZZ09999999999",
+    "mandateReference": "REF A-123",
+    "debitedIban": "DE21860000000086001055",
+    "terms": "Der Betrag in Höhe von EUR 529,87 wird am 20.03.2018 von Ihrem Konto per SEPA-Lastschrift eingezogen."
+  },
+  "lines": [
+    {
+      "id": "1",
+      "name": "Trennblätter A4",
+      "quantity": "20.0000",
+      "unit": "H87",
+      "unitPrice": "9.9000",
+      "vat": {
+        "category": "S",
+        "rate": "19.00"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Joghurt Banane",
+      "quantity": "50.0000",
+      "unit": "H87",
+      "unitPrice": "5.5000",
+      "vat": {
+        "category": "S",
+        "rate": "7.00"
+      }
+    }
+  ]
+}

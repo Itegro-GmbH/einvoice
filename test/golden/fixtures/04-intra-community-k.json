@@ -1,0 +1,74 @@
+{
+  "profile": "en16931",
+  "number": "RE-2026-00004",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-26",
+  "delivery": {
+    "date": "2026-09-08",
+    "recipientName": "Lager Wien",
+    "address": {
+      "street": "Lagerstraße 5",
+      "city": "Wien",
+      "postalCode": "1100",
+      "country": "AT"
+    }
+  },
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "93815/08152",
+    "legalRegistration": {
+      "id": "HRB 12345",
+      "scheme": "0002"
+    },
+    "contact": {
+      "name": "Erika Muster",
+      "phone": "+49 711 123456-0",
+      "email": "rechnung@musterwerk.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "rechnung@musterwerk.example"
+    }
+  },
+  "buyer": {
+    "name": "Alpen Handel GmbH",
+    "address": {
+      "street": "Ringstraße 10",
+      "city": "Wien",
+      "postalCode": "1010",
+      "country": "AT"
+    },
+    "vatId": "ATU12345678"
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE89370400440532013000"
+  },
+  "lines": [
+    {
+      "name": "Prüfgerät PX-200",
+      "quantity": 5,
+      "unit": "Stück",
+      "unitPrice": "1250.00",
+      "vat": {
+        "category": "K"
+      }
+    },
+    {
+      "name": "Ersatzteilset",
+      "quantity": 10,
+      "unit": "Set",
+      "unitPrice": "48.50",
+      "vat": {
+        "category": "K"
+      }
+    }
+  ]
+}

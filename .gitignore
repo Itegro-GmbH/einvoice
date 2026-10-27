@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+*.tgz
+.DS_Store
+# veraPDF CLI installed by scripts/setup-verapdf.sh
+tools/verapdf/
+tools/verapdf-auto-install.xml
+tools/verapdf-installer.zip
+# Factur-X rule sets are downloaded and compiled locally (npx einvoice-setup-facturx), never committed
+schematron/facturx/

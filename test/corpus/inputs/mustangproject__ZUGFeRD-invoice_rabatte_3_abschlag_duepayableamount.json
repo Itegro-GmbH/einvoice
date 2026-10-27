@@ -1,0 +1,52 @@
+{
+  "profile": "en16931",
+  "number": "ST-1499",
+  "issueDate": "2019-07-26",
+  "deliveryDate": "2019-07-26",
+  "notes": [
+    "Rechnung"
+  ],
+  "seller": {
+    "name": "DATAflor Musterbetrieb",
+    "address": {
+      "street": "August-Spindler-Straße 20",
+      "city": "Göttingen",
+      "postalCode": "37079",
+      "country": "DE"
+    },
+    "vatId": "DE123456789"
+  },
+  "buyer": {
+    "name": "Thomas Adler",
+    "address": {
+      "street": "[unbekannt]",
+      "city": "[unbekannt]",
+      "postalCode": "00000",
+      "country": "DE"
+    }
+  },
+  "allowances": [
+    {
+      "amount": "1.00",
+      "reason": "sondernachlass",
+      "vat": {
+        "category": "S",
+        "rate": "19.00"
+      }
+    }
+  ],
+  "prepaidAmount": "50.00",
+  "lines": [
+    {
+      "id": "0004",
+      "name": "pos 4",
+      "quantity": "2.77",
+      "unit": "H87",
+      "unitPrice": "20.00",
+      "vat": {
+        "category": "S",
+        "rate": "19.00"
+      }
+    }
+  ]
+}

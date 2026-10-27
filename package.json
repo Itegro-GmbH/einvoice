@@ -1,0 +1,102 @@
+{
+  "name": "@itegro/einvoice",
+  "version": "0.1.0",
+  "description": "Generate and validate EN 16931 e-invoices (ZUGFeRD, Factur-X, XRechnung): cent-exact calculation, CII XML, Schematron validation, PDF/A-3B with embedded XML.",
+  "keywords": [
+    "zugferd",
+    "factur-x",
+    "xrechnung",
+    "en16931",
+    "e-invoice",
+    "pdfa",
+    "invoice",
+    "germany",
+    "eu"
+  ],
+  "homepage": "https://github.com/Itegro-GmbH/einvoice#readme",
+  "bugs": {
+    "url": "https://github.com/Itegro-GmbH/einvoice/issues",
+    "email": "support@itegro-gmbh.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Itegro-GmbH/einvoice.git"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "assets",
+    "licenses",
+    "schematron/SOURCE.md",
+    "schematron/**/*.sef.json",
+    "!schematron/facturx",
+    "schematron/xrechnung/LICENSE-Apache-2.0.txt",
+    "NOTICE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/clean-dist.mjs && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "smoke": "node scripts/smoke/run-local.mjs",
+    "smoke:docker": "node scripts/smoke/run-docker.mjs",
+    "compile-sef": "node scripts/compile-sef.mjs",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run typecheck && npm run lint && npm test",
+    "setup:facturx": "node dist/cli/setup-facturx.js",
+    "setup:verapdf": "sh scripts/setup-verapdf.sh"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^4.9.0",
+    "decimal.js": "^10.6.0",
+    "pdf-lib": "^1.17.1",
+    "saxon-js": "~2.7.0",
+    "zod": "^4.6.5"
+  },
+  "peerDependencies": {
+    "@types/react": "^18.2.0 || ^19.0.0",
+    "react": "^18.2.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@napi-rs/canvas": "1.0.9",
+    "@types/node": "22.20.2",
+    "@types/pngjs": "6.0.5",
+    "@types/react": "19.3.0",
+    "eslint": "10.10.0",
+    "fast-check": "4.10.0",
+    "pdfjs-dist": "6.3.289",
+    "pixelmatch": "7.2.0",
+    "pngjs": "7.0.0",
+    "react": "19.3.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.0",
+    "vitest": "4.1.11",
+    "xslt3": "2.7.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "bin": {
+    "einvoice-setup-facturx": "./dist/cli/setup-facturx.js"
+  },
+  "author": "Itegro GmbH <support@itegro-gmbh.de>"
+}

@@ -1,0 +1,59 @@
+{
+  "profile": "basic",
+  "number": "RE-2026-00010",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-26",
+  "deliveryDate": "2026-09-12",
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789"
+  },
+  "buyer": {
+    "name": "Beispiel & Söhne KG",
+    "address": {
+      "street": "Hauptstraße 1",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "country": "DE"
+    }
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE89370400440532013000"
+  },
+  "lines": [
+    {
+      "name": "Kabelsatz",
+      "quantity": 25,
+      "unit": "Stück",
+      "unitPrice": "3.20",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      },
+      "allowances": [
+        {
+          "amount": "5.00",
+          "reason": "Mengenrabatt",
+          "reasonCode": "95"
+        }
+      ]
+    },
+    {
+      "name": "Montage",
+      "quantity": "2.5",
+      "unit": "Stunde",
+      "unitPrice": "65.00",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    }
+  ]
+}

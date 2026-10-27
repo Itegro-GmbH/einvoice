@@ -1,0 +1,75 @@
+{
+  "profile": "xrechnung",
+  "number": "123456XX",
+  "issueDate": "2016-04-04",
+  "buyerReference": "04011000-12345-03",
+  "notes": [
+    "Es gelten unsere Allgem. Geschäftsbedingungen, die Sie unter […] finden."
+  ],
+  "seller": {
+    "name": "[Seller name]",
+    "legalRegistration": {
+      "id": "[HRA-Eintrag]"
+    },
+    "address": {
+      "street": "[Seller address line 1]",
+      "city": "[Seller city]",
+      "postalCode": "12345",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "contact": {
+      "name": "nicht vorhanden",
+      "phone": "+49 1234-5678",
+      "email": "seller@email.de"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "seller@email.de"
+    }
+  },
+  "buyer": {
+    "name": "[Buyer name]",
+    "id": "[Buyer identifier]",
+    "address": {
+      "street": "[Buyer address line 1]",
+      "city": "[Buyer city]",
+      "postalCode": "12345",
+      "country": "DE"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "buyer@info.de"
+    }
+  },
+  "payment": {
+    "means": "58",
+    "iban": "DE79000000001234567890",
+    "terms": "Zahlbar sofort ohne Abzug."
+  },
+  "lines": [
+    {
+      "id": "Zeitschrift [...]",
+      "name": "Zeitschrift [...]",
+      "description": "Zeitschrift Inland",
+      "quantity": 1,
+      "unit": "XPP",
+      "unitPrice": "288.79",
+      "vat": {
+        "category": "S",
+        "rate": 7
+      }
+    },
+    {
+      "id": "Porto + Versandkosten",
+      "name": "Porto + Versandkosten",
+      "quantity": 1,
+      "unit": "XPP",
+      "unitPrice": "26.07",
+      "vat": {
+        "category": "S",
+        "rate": 7
+      }
+    }
+  ]
+}

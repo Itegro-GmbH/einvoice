@@ -1,0 +1,181 @@
+/**
+ * All visible texts of the PDF layout (language `de`): key → text.
+ * No text lives in components or in the view model; multi-language support only needs a second file
+ * with the same `Texts` type. Placeholders in curly braces are replaced by `fill()`.
+ */
+export const de = {
+  locale: 'de',
+
+  // Document title per UNTDID 1001
+  title380: 'Rechnung',
+  title381: 'Gutschrift',
+  title384: 'Rechnungskorrektur',
+  /** Subject in the PDF info dict/XMP */
+  pdfSubject: '{title} {number} vom {date}',
+  precedingInvoice: 'Korrektur zu Rechnung {number} vom {date}',
+  precedingInvoiceNoDate: 'Korrektur zu Rechnung {number}',
+  precedingCreditNote: 'Gutschrift zu Rechnung {number} vom {date}',
+  precedingCreditNoteNoDate: 'Gutschrift zu Rechnung {number}',
+
+  // Info block
+  invoiceNumber: 'Rechnungsnummer',
+  creditNoteNumber: 'Gutschriftsnummer',
+  issueDate: 'Rechnungsdatum',
+  customerId: 'Kundennummer',
+  deliveryDate: 'Leistungsdatum',
+  servicePeriod: 'Leistungszeitraum',
+  dueDate: 'Fälligkeitsdatum',
+  orderReference: 'Ihre Bestellnummer',
+  buyerReference: 'Käuferreferenz',
+  buyerVatId: 'Ihre USt-IdNr.',
+  contactPerson: 'Ansprechpartner',
+  rangeSeparator: ' – ',
+
+  // Address
+  recipient: 'Rechnungsempfänger',
+  deliveryAddress: 'Lieferanschrift',
+  sender: 'Rechnungssteller',
+
+  // Line items table
+  colPos: 'Pos.',
+  colName: 'Bezeichnung',
+  colQuantity: 'Menge',
+  colUnit: 'Einheit',
+  colUnitPrice: 'Einzelpreis',
+  colVat: 'USt.',
+  colNet: 'Betrag (netto)',
+  lineAllowance: 'Abschlag {reason}{percent}: {amount}',
+  lineCharge: 'Zuschlag {reason}{percent}: {amount}',
+  allowanceDefaultReason: 'Rabatt',
+  chargeDefaultReason: 'Zuschlag',
+  priceBaseQuantity: 'Preis je {quantity} {unit}',
+
+  // Totals block
+  lineTotal: 'Summe Positionen',
+  docAllowance: 'Abschlag {reason}{percent}',
+  docCharge: 'Zuschlag {reason}{percent}',
+  netTotal: 'Nettobetrag',
+  vatLine: 'zzgl. {rate} Umsatzsteuer auf {base}',
+  grossTotal: 'Gesamtbetrag',
+  prepaid: 'abzgl. Vorauszahlung',
+  rounding: 'Rundung',
+  payable: 'Zahlbetrag',
+
+  // Tax notes (categories without tax shown)
+  vatStandard: 'Umsatzsteuer {rate}',
+  vatZero: 'Umsatzsteuer 0 %',
+  vatExemptFallback: 'Steuerbefreite Leistung',
+  vatNoteWithBase: '{reason} (Bemessungsgrundlage {base})',
+
+  // Payment
+  paymentTitle: 'Zahlung',
+  payTransfer: 'Bitte überweisen Sie {amount} bis zum {date} auf das folgende Konto:',
+  payTransferNoDate: 'Bitte überweisen Sie {amount} auf das folgende Konto:',
+  payAccount: 'IBAN {iban}',
+  payBic: 'BIC {bic}',
+  payHolder: 'Kontoinhaber {holder}',
+  payReference: 'Verwendungszweck: {reference}',
+  payDirectDebit: '{amount} wird am {date} per SEPA-Lastschrift von Ihrem Konto {iban} eingezogen.',
+  payDirectDebitNoDate: '{amount} wird per SEPA-Lastschrift von Ihrem Konto {iban} eingezogen.',
+  payCreditorId: 'Gläubiger-Identifikationsnummer {creditorId}',
+  payMandate: 'Mandatsreferenz {mandate}',
+  payCard: 'Der Betrag von {amount} wurde per Karte gezahlt.',
+  payCash: 'Der Betrag von {amount} wurde bar gezahlt.',
+  payDue: 'Zahlbar bis {date}.',
+  skonto: 'Skonto {percent} bei Zahlung innerhalb von {days} Tagen{base}.',
+  skontoBase: ' (Basis {amount})',
+  separator: ' · ',
+
+  // Footer
+  phone: 'Tel. {phone}',
+  vatId: 'USt-IdNr. {vatId}',
+  taxNumber: 'Steuernummer {taxNumber}',
+  legalRegistration: 'Handelsregister {id}',
+  embeddedNote: 'Dieses PDF enthält eine maschinenlesbare Rechnung (ZUGFeRD/Factur-X, Profil {profile}) als eingebettete Datei factur-x.xml.',
+  page: 'Seite {n} von {m}',
+  notesTitle: 'Hinweise',
+
+  // Profile names in the note text
+  profileNames: {
+    basic: 'BASIC',
+    en16931: 'EN 16931',
+    extended: 'EXTENDED',
+    xrechnung: 'XRechnung',
+  },
+
+  // Country names (only shown when the country differs from the seller's country); unknown → code
+  countries: {
+    DE: 'Deutschland',
+    AT: 'Österreich',
+    CH: 'Schweiz',
+    FR: 'Frankreich',
+    IT: 'Italien',
+    NL: 'Niederlande',
+    BE: 'Belgien',
+    LU: 'Luxemburg',
+    PL: 'Polen',
+    CZ: 'Tschechien',
+    DK: 'Dänemark',
+    SE: 'Schweden',
+    ES: 'Spanien',
+    PT: 'Portugal',
+    GB: 'Vereinigtes Königreich',
+    US: 'USA',
+    IE: 'Irland',
+    FI: 'Finnland',
+    NO: 'Norwegen',
+    HU: 'Ungarn',
+    LI: 'Liechtenstein',
+  } as Readonly<Record<string, string>>,
+
+  // Unit codes (UN/ECE Rec. 20/21) → readable name; unknown codes are shown unchanged.
+  units: {
+    C62: 'Stk.',
+    H87: 'Stk.',
+    EA: 'Stk.',
+    NAR: 'Stk.',
+    LS: 'pauschal',
+    SET: 'Set',
+    PR: 'Paar',
+    P1: '%',
+    E48: 'Einheit',
+    E49: 'Arbeitstag',
+    HUR: 'Std.',
+    MIN: 'Min.',
+    SEC: 'Sek.',
+    DAY: 'Tag',
+    WEE: 'Woche',
+    MON: 'Monat',
+    ANN: 'Jahr',
+    KGM: 'kg',
+    GRM: 'g',
+    MGM: 'mg',
+    TNE: 't',
+    MTR: 'm',
+    CMT: 'cm',
+    MMT: 'mm',
+    KMT: 'km',
+    MTK: 'm²',
+    CMK: 'cm²',
+    MTQ: 'm³',
+    LTR: 'l',
+    MLT: 'ml',
+    HLT: 'hl',
+    KWH: 'kWh',
+    MWH: 'MWh',
+    KWT: 'kW',
+    KMH: 'km/h',
+    XBX: 'Box',
+    XPK: 'Paket',
+    XPA: 'Päckchen',
+    XCT: 'Karton',
+    XPX: 'Palette',
+    XRO: 'Rolle',
+    XBG: 'Beutel',
+    XBO: 'Flasche',
+    XCA: 'Dose',
+    XCR: 'Kiste',
+  } as Readonly<Record<string, string>>,
+} as const;
+
+export type Texts = typeof de;

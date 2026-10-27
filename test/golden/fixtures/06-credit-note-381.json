@@ -1,0 +1,71 @@
+{
+  "profile": "en16931",
+  "type": "credit-note",
+  "number": "GS-2026-00006",
+  "issueDate": "2026-09-12",
+  "deliveryDate": "2026-09-01",
+  "notes": [
+    "Gutschrift zur Rechnung RE-2026-00001 vom 12.09.2026: Rücknahme Lizenz Prüfmodul."
+  ],
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "93815/08152",
+    "legalRegistration": {
+      "id": "HRB 12345",
+      "scheme": "0002"
+    },
+    "contact": {
+      "name": "Erika Muster",
+      "phone": "+49 711 123456-0",
+      "email": "rechnung@musterwerk.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "rechnung@musterwerk.example"
+    }
+  },
+  "buyer": {
+    "name": "Beispiel & Söhne KG",
+    "address": {
+      "street": "Hauptstraße 1",
+      "street2": "Hinterhaus",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "country": "DE"
+    },
+    "vatId": "DE987654321",
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "einkauf@beispiel.example"
+    }
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE89370400440532013000"
+  },
+  "precedingInvoices": [
+    {
+      "number": "RE-2026-00001",
+      "issueDate": "2026-09-12"
+    }
+  ],
+  "lines": [
+    {
+      "name": "Lizenz Prüfmodul (Rücknahme)",
+      "quantity": 3,
+      "unit": "Monat",
+      "unitPrice": "49.90",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    }
+  ]
+}

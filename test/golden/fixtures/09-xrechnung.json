@@ -1,0 +1,80 @@
+{
+  "profile": "xrechnung",
+  "number": "RE-2026-00009",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-10-12",
+  "deliveryDate": "2026-09-05",
+  "buyerReference": "04011000-12345-03",
+  "seller": {
+    "name": "Musterwerk GmbH",
+    "address": {
+      "street": "Industriestraße 12",
+      "city": "Stuttgart",
+      "postalCode": "70565",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "taxNumber": "93815/08152",
+    "legalRegistration": {
+      "id": "HRB 12345",
+      "scheme": "0002"
+    },
+    "contact": {
+      "name": "Erika Muster",
+      "phone": "+49 711 123456-0",
+      "email": "rechnung@musterwerk.example"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "rechnung@musterwerk.example"
+    }
+  },
+  "buyer": {
+    "name": "Stadtverwaltung Musterstadt",
+    "address": {
+      "street": "Rathausplatz 1",
+      "city": "Musterstadt",
+      "postalCode": "12345",
+      "country": "DE"
+    },
+    "electronicAddress": {
+      "scheme": "0204",
+      "value": "04011000-12345-03"
+    },
+    "orderReference": "BEST-2026-0042",
+    "contact": {
+      "name": "Zentrale Rechnungsstelle",
+      "email": "rechnungen@musterstadt.example"
+    }
+  },
+  "payment": {
+    "means": "58",
+    "iban": "DE89370400440532013000",
+    "bic": "COBADEFFXXX",
+    "accountHolder": "Musterwerk GmbH",
+    "terms": "Zahlbar innerhalb von 30 Tagen ohne Abzug.\n#SKONTO#TAGE=10#PROZENT=2.00#",
+    "reference": "RE-2026-00009"
+  },
+  "lines": [
+    {
+      "name": "Digitalisierung Aktenbestand",
+      "quantity": "1500",
+      "unit": "Stück",
+      "unitPrice": "0.45",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    },
+    {
+      "name": "Projektleitung",
+      "quantity": "16.5",
+      "unit": "Stunde",
+      "unitPrice": "98.00",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    }
+  ]
+}

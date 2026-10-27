@@ -1,0 +1,77 @@
+{
+  "profile": "xrechnung",
+  "number": "18383",
+  "issueDate": "2020-11-27",
+  "dueDate": "2020-12-27",
+  "deliveryDate": "2020-11-23",
+  "buyerReference": "04011000-12349-88",
+  "seller": {
+    "name": "Mustermann GmbH",
+    "id": "116078",
+    "address": {
+      "street": "Musterstrasse 4",
+      "city": "Frankfurt am Main",
+      "postalCode": "60388",
+      "country": "DE"
+    },
+    "vatId": "DE152338654",
+    "taxNumber": "04523149435",
+    "contact": {
+      "name": "Wolfgang Muster",
+      "phone": "069-12335",
+      "email": "mail@muster.de"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "seller@email.de"
+    }
+  },
+  "buyer": {
+    "name": "DB Station&Service AG RB Mitte",
+    "id": "10099",
+    "address": {
+      "street": "Musterweg 1",
+      "city": "Berlin",
+      "postalCode": "10115",
+      "country": "DE"
+    },
+    "vatId": "DE152138634",
+    "contact": {
+      "name": "Klaus Koffer"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "buyer@info.de"
+    }
+  },
+  "payment": {
+    "means": "58",
+    "iban": "DE79000000001234567890",
+    "accountHolder": "Mustermann GmbH",
+    "bic": "DRESDEFFXXX",
+    "terms": "10 Tage 3% Skonto, 30 Tage netto"
+  },
+  "charges": [
+    {
+      "amount": "25.00",
+      "reason": "Lieferpauschale",
+      "vat": {
+        "category": "AE",
+        "exemptionReason": "als gemeinnützig anerkannt"
+      }
+    }
+  ],
+  "lines": [
+    {
+      "id": "1",
+      "name": "Tür Instandsetzung",
+      "quantity": "4.00",
+      "unit": "HUR",
+      "unitPrice": "52.00",
+      "vat": {
+        "category": "AE",
+        "exemptionReason": "als gemeinnützig anerkannt"
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "profile": "en16931",
+  "number": "2026-017",
+  "issueDate": "2026-09-12",
+  "dueDate": "2026-09-26",
+  "deliveryDate": "2026-09-11",
+  "seller": {
+    "name": "Anna Beispiel Grafikdesign",
+    "id": "KU-2026",
+    "address": {
+      "street": "Ateliergasse 3",
+      "city": "Leipzig",
+      "postalCode": "04109",
+      "country": "DE"
+    },
+    "taxNumber": "231/123/45678"
+  },
+  "buyer": {
+    "name": "Buchhandlung Lesezeit",
+    "address": {
+      "street": "Marktplatz 2",
+      "city": "Leipzig",
+      "postalCode": "04109",
+      "country": "DE"
+    }
+  },
+  "payment": {
+    "means": "transfer",
+    "iban": "DE02120300000000202051"
+  },
+  "notes": [
+    "Gemäß § 19 UStG wird keine Umsatzsteuer berechnet."
+  ],
+  "lines": [
+    {
+      "name": "Logo-Entwurf",
+      "quantity": 1,
+      "unit": "Pauschale",
+      "unitPrice": "850.00",
+      "vat": {
+        "category": "E",
+        "exemptionReason": "Kein Ausweis von Umsatzsteuer aufgrund der Kleinunternehmerregelung (§ 19 UStG)"
+      }
+    }
+  ]
+}

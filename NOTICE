@@ -1,0 +1,121 @@
+@itegro/einvoice
+Copyright 2026 Itegro GmbH
+
+This product includes software developed at Itegro GmbH
+(https://github.com/Itegro-GmbH/einvoice), licensed under the Apache License,
+Version 2.0 (see LICENSE). Contact: support@itegro-gmbh.de
+
+The package also ships third-party data files that are NOT covered by the
+Apache License 2.0 of this project's own code. They are listed here with their
+licenses and sources. License texts are included in the repository and in the
+package (licenses/ and the directories named below).
+
+--------------------------------------------------------------------------------
+1. Fonts (assets/fonts/)
+--------------------------------------------------------------------------------
+
+DejaVu Sans and DejaVu Sans Bold, version 2.37
+  Copyright (c) 2003 Bitstream, Inc. All Rights Reserved. Bitstream Vera is a
+  trademark of Bitstream, Inc. DejaVu changes are in the public domain. Glyphs
+  imported from Arev fonts are Copyright (c) 2006 Tavmjong Bah.
+  License: Bitstream Vera Fonts License (permits use, copying, merging,
+  publishing and distribution, including as part of a larger software package,
+  provided the copyright notice and license text are included).
+  Text: assets/fonts/LICENSE-DejaVu.txt
+  Source: https://github.com/dejavu-fonts/dejavu-fonts/releases/tag/version_2_37
+
+PT Serif Regular and Bold
+  Copyright (c) 2010, ParaType Ltd. (http://www.paratype.com/public),
+  with Reserved Font Names "PT Sans", "PT Serif" and "ParaType".
+  License: SIL Open Font License, Version 1.1 (permits bundling and embedding
+  with software; the fonts are distributed unmodified and not sold by themselves).
+  Text: assets/fonts/PTSerif-OFL.txt
+  Source: https://github.com/google/fonts/tree/main/ofl/ptserif
+
+--------------------------------------------------------------------------------
+2. Color profile (assets/icc/)
+--------------------------------------------------------------------------------
+
+sRGB-v2-magic.icc, from the Compact-ICC-Profiles collection
+  https://github.com/saucecontrol/Compact-ICC-Profiles
+  License: CC0 1.0 Universal (public domain dedication).
+  Text: assets/icc/LICENSE-CC0.txt
+
+--------------------------------------------------------------------------------
+3. Precompiled Schematron rule sets (schematron/**/*.sef.json)
+--------------------------------------------------------------------------------
+
+The .sef.json files are the original Schematron rules compiled to the SaxonJS
+stylesheet export format (SEF), with two small, documented workarounds for
+SaxonJS 2.7 (see schematron/SOURCE.md). They are modified (compiled) forms of
+the works named below and are distributed under the license of the respective
+original. They are separate data files that the library loads at runtime; they
+are not linked into or merged with this project's code.
+
+3.1 EN 16931 CII validation artefacts, version 1.3.16 (CEN/TC 434)
+    Published by the European Commission / ConnectingEurope.
+    Source: https://github.com/ConnectingEurope/eInvoicing-EN16931
+            (release validation-1.3.16, asset en16931-cii-1.3.16.zip)
+    License: European Union Public Licence (EUPL) version 1.2.
+    Text: licenses/EUPL-1.2.txt
+    Files: schematron/en16931/EN16931-CII-validation.sef.json
+    Source code availability (EUPL, Article 5): the original XSLT, the
+    compilation script and the compiled files are available in the Git
+    repository https://github.com/Itegro-GmbH/einvoice under schematron/en16931/
+    and scripts/compile-sef.mjs; the upstream source is at the link above.
+
+3.2 XRechnung 3.0.2 Schematron, version 2.6.0 (KoSIT)
+    Published by the Koordinierungsstelle fuer IT-Standards (KoSIT).
+    Source: https://github.com/itplr-kosit/xrechnung-schematron
+            (release v2.6.0, asset xrechnung-3.0.2-schematron-2.6.0.zip)
+    License: Apache License, Version 2.0.
+    Text: schematron/xrechnung/LICENSE-Apache-2.0.txt (the upstream license file,
+    unchanged; it also contains the upstream note on the reproduction of the
+    EN 16931 based data model by permission of CEN and DIN). The upstream
+    repository contains no NOTICE file.
+    Files: schematron/xrechnung/XRechnung-CII-validation.sef.json
+
+3.3 Factur-X / ZUGFeRD Schematron rule sets: NOT included
+    The rule sets published by FNFE-MPE and FeRD for the Factur-X / ZUGFeRD
+    profiles BASIC, EN 16931 and EXTENDED carry no license statement that
+    permits redistribution (the publishers' site reserves all rights and the
+    original packages are only available behind a registration form), so they
+    are neither part of the repository nor of the npm package. They are downloaded from their public source and compiled
+    on your machine when you run "npx einvoice-setup-facturx" (see README).
+
+--------------------------------------------------------------------------------
+4. Test data (repository only, not part of the npm package)
+--------------------------------------------------------------------------------
+
+test/corpus/xrechnung-testsuite/
+  Instances from https://github.com/itplr-kosit/xrechnung-testsuite
+  (release v2026-08-31), Koordinierungsstelle fuer IT-Standards (KoSIT);
+  04.05a-INVOICE_uncefact.xml: Copyright 2020 BITMARCK Service GmbH.
+  License: Apache License, Version 2.0 (the license is repeated in the file
+  header where the file carries one). Files are unmodified.
+
+test/corpus/mustangproject/
+  Instances from https://github.com/ZUGFeRD/mustangproject (commit
+  abf4544f4d555b8c42e0c4edf7d6241a1d3da2c3), Copyright 2014 Jochen Staerk and
+  contributors.
+  License: Apache License, Version 2.0. Files are unmodified. Instances that
+  carry FeRD / FNFE-MPE terms of use were left out (see test/corpus/SOURCE.md).
+
+test/corpus/en16931/CII_example1.xml
+  Example from https://github.com/ConnectingEurope/eInvoicing-EN16931
+  (release validation-1.3.16).
+  License: EUPL 1.2 (licenses/EUPL-1.2.txt). File is unmodified.
+
+All other test fixtures (test/golden, test/corpus/inputs, test/visual, test/fixtures)
+were written for this project and are covered by its Apache License 2.0. The
+fixtures contain invented names, addresses and numbers only.
+
+--------------------------------------------------------------------------------
+5. Runtime dependencies (installed by your package manager, not shipped here)
+--------------------------------------------------------------------------------
+
+@react-pdf/renderer, pdf-lib, decimal.js, zod and react are MIT licensed.
+saxon-js (Saxonica Ltd) is distributed under the Saxonica SaxonJS license
+(see its LICENSE.txt); it may be used and redistributed in binary form as part of
+an application, but not made available for copying on a site whose primary
+purpose is to distribute it to third parties.

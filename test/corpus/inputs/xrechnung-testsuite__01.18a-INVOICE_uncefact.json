@@ -1,0 +1,113 @@
+{
+  "profile": "xrechnung",
+  "type": "384",
+  "number": "PRG1502112",
+  "issueDate": "2015-04-24",
+  "buyerReference": "99000000-18188-18",
+  "notes": [
+    "Trainer: Herr […]"
+  ],
+  "periodStart": "2015-04-20",
+  "periodEnd": "2015-04-24",
+  "seller": {
+    "name": "[Seller name]",
+    "legalRegistration": {
+      "id": "HRB 123456"
+    },
+    "address": {
+      "street": "[Seller address line 1]",
+      "city": "[Seller city]",
+      "postalCode": "12345",
+      "country": "DE"
+    },
+    "vatId": "DE123456789",
+    "contact": {
+      "name": "[Seller contact person]",
+      "phone": "+49 123456789",
+      "email": "xxx@schulung.de"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "seller@email.de"
+    }
+  },
+  "buyer": {
+    "name": "[Buyer name]",
+    "id": "BI123456",
+    "address": {
+      "street": "[Buyer address line 1]",
+      "city": "[Buyer city]",
+      "postalCode": "12345",
+      "country": "DE"
+    },
+    "electronicAddress": {
+      "scheme": "EM",
+      "value": "buyer@info.de"
+    }
+  },
+  "delivery": {
+    "recipientName": "Schulungsanbieter",
+    "address": {
+      "street": "[Schulungsort]",
+      "city": "Schulungsort",
+      "postalCode": "12345",
+      "country": "DE"
+    }
+  },
+  "payment": {
+    "means": "58",
+    "iban": "DE79000000001234567890",
+    "terms": "14 Tage"
+  },
+  "precedingInvoices": [
+    {
+      "number": "PRG1502168"
+    }
+  ],
+  "lines": [
+    {
+      "id": "Seminar: […]",
+      "name": "Seminar",
+      "quantity": 5,
+      "unit": "DAY",
+      "unitPrice": "1340",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    },
+    {
+      "id": "Raumkosten Schulungsort",
+      "name": "Raumkosten",
+      "quantity": 5,
+      "unit": "DAY",
+      "unitPrice": "300",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    },
+    {
+      "id": "Reisekostenpauschale",
+      "name": "Reisekostenpauschale",
+      "quantity": 5,
+      "unit": "XPP",
+      "unitPrice": "90",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    },
+    {
+      "id": "Seminarunterlagen",
+      "name": "Seminarunterlagen",
+      "quantity": 11,
+      "unit": "XPP",
+      "unitPrice": "20",
+      "vat": {
+        "category": "S",
+        "rate": 19
+      }
+    }
+  ]
+}
