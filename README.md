@@ -86,6 +86,34 @@ npx einvoice-setup-facturx
 
 The command downloads the original stylesheets from a pinned commit of a public mirror, verifies their SHA-256 checksums, applies two documented patches and compiles them with SaxonJS into `schematron/facturx/` inside the installed package (about 30 seconds, needs network access and writes about 22 MB). Options: `--dir <path>` (or the environment variable `EINVOICE_FACTURX_DIR`) to choose another directory, `--force` to rebuild. From code: `await installFacturxRuleSets({ dir })`.
 
+### Set it up automatically
+
+If you use the Factur-X profiles, make the step part of your own install instead of
+remembering it. One line in the consuming project's `package.json`:
+
+```json
+{
+  "scripts": {
+    "postinstall": "einvoice-setup-facturx"
+  }
+}
+```
+
+From then on every `npm install` and `npm ci` sets the rule sets up, locally and in CI.
+The trade-off is that installing now needs network access: in an offline or sandboxed
+install this fails. Pick a directory outside `node_modules` if you reinstall often, so
+the files survive and can be cached:
+
+```json
+{
+  "scripts": {
+    "postinstall": "einvoice-setup-facturx --dir .facturx"
+  }
+}
+```
+
+Then set `EINVOICE_FACTURX_DIR=.facturx` in the environment your application runs in.
+
 For CI and images, run it in the build step after `npm ci` (and cache `node_modules/@itegro/einvoice/schematron/facturx`). It is not run automatically on install, because a package should not download and execute things behind your back.
 
 If the rule sets are missing, nothing breaks: the XML is still validated against EN 16931 (and the XRechnung profile is complete, it does not use the Factur-X rules). Profiles `basic`, `en16931` and `extended` add the warning `IF-WARN-100` ("The Schematron rule set FACTURX-... is not installed") to `warnings`; the `extended` profile is checked by the Factur-X rules only, so it is not checked at all until they are installed. Pass `requireAllRuleSets: true` to `generate()`, `generateXml()` or `validateXml()` to throw a `RuleSetUnavailableError` instead. `validateXml()` reports what it skipped in `result.skipped`.
